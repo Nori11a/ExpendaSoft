@@ -10,9 +10,9 @@ namespace CompleteProject
 
 
 		Animator anim;                              // Reference to the animator component.
-		//GameObject player;                          // Reference to the player GameObject.
+		GameObject player;                          // Reference to the player GameObject.
 		GameObject enemy;
-		//PlayerHealth playerHealth;                  // Reference to the player's health.
+		PlayerHealth playerHealth;                  // Reference to the player's health.
 		EnemyHealth enemyHealth;                    // Reference to this enemy's health.
 		bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
 		float timer;    
@@ -20,9 +20,9 @@ namespace CompleteProject
 		void Awake ()
 		{
 			// Setting up the references.
-			//player = GameObject.FindGameObjectWithTag ("Player");
+			player = GameObject.FindGameObjectWithTag ("Player");
 			enemy = GameObject.FindGameObjectWithTag("Enemy");
-			//playerHealth = player.GetComponent <PlayerHealth> ();
+			playerHealth = player.GetComponent <PlayerHealth> ();
 			enemyHealth = enemy.GetComponent<EnemyHealth>();
 			anim = GetComponent <Animator> ();
 		}
@@ -30,11 +30,28 @@ namespace CompleteProject
 		void OnTriggerEnter (Collider other)
 		{
 			// If the entering collider is the player...
-			if(other.gameObject == enemy)
+
+			if(tag == "Nu")
 			{
-				// ... the player is in range.
-				//playerInRange = true;
-				enemyHealth.TakeDamage (attackDamage);
+				if(other.gameObject == player)
+				{
+					// ... the player is in range.
+					//playerInRange = true;
+					playerHealth.TakeDamage (attackDamage);
+				}
+				else if(other.gameObject == enemy)
+				{
+					enemyHealth.TakeDamage(attackDamage);
+				}
+			}
+			else
+			{
+				if(other.gameObject == enemy)
+				{
+					// ... the player is in range.
+					//playerInRange = true;
+					enemyHealth.TakeDamage (attackDamage);
+				}
 			}
 		}
 	}

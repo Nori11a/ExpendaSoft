@@ -4,46 +4,40 @@ using UnityEngine;
 
 public class Parry : MonoBehaviour
 {
-	private Light myLight;
+	public GameObject parry;
 
-	public Sprite knob;  
-	public int coolDown = 150;
+	//public Sprite knob;  
+	public float coolDown = 5; //tells the shield how long to stay active and how long will it be unusable
 
     void Start()
     {
-		myLight = GetComponent<Light>();
+		parry.SetActive(false); //the shield starts out inactive
     }
-
-    // Update is called once per frame
+		
     void Update()
     {
-		if (myLight.enabled == false)
+		if(Input.GetKey(KeyCode.Space) && coolDown == 5) //sets off the shield, but only when the cooldown is full
 		{
-			if(coolDown < 150)
-			{
-				coolDown++;
-			}
-			else
-			{
-				if(Input.GetKeyUp(KeyCode.Space))
-				{
-					myLight.enabled = true;
-				}
-			}
+			parry.SetActive(true);
 		}
-		else
-		{
-			coolDown -= 5;
 
-			if (coolDown == 0)
+		if(parry.activeSelf)
+		{
+			coolDown -= Time.deltaTime * 20; //checks to see how long the shield can be active
+		}
+		else //while the shield is inactive the cooldown will try to fill itself back up
+		{
+			coolDown += Time.deltaTime * 10;
+			if (coolDown > 5) //insures that the coolDown never surpasses 5, making the parry unusable
 			{
-				myLight.enabled = false;
+				coolDown = 5;
 			}
 		}
 
-
-
-
+		if (coolDown < 1) //wheen the cooldown hits 0, the shield deactives
+		{
+			parry.SetActive(false);
+		}
 
     }
 }

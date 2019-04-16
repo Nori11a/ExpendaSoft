@@ -32,12 +32,29 @@ namespace CompleteProject
         void OnTriggerEnter (Collider other)
         {
             // If the entering collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is in range.
-                //playerInRange = true;
-				playerHealth.TakeDamage (attackDamage);
-            }
+			if(tag == "Nu")
+			{
+				if(other.gameObject == player)
+				{
+					// ... the player is in range.
+					//playerInRange = true;
+					playerHealth.TakeDamage (attackDamage);
+				}
+				else if(other.gameObject == enemy)
+				{
+					enemyHealth.TakeDamage(attackDamage);
+				}
+			}
+			else
+			{
+				if(other.gameObject == player)
+				{
+					// ... the player is in range.
+					//playerInRange = true;
+					playerHealth.TakeDamage (attackDamage);
+				}
+			}
+
 			/*else if(other.gameObject == enemy)  //edit later for when reflecting is possible
 			{
 				enemyHealth.TakeDamage (attackDamage);
