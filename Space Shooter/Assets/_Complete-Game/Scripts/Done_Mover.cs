@@ -28,7 +28,7 @@ namespace CompleteProject
 			if(Reflect.tag == "Reflect")
 			{
 				tag = "Nu";
-				//myLight.enabled = true;
+				myLight.enabled = true;
 				GetComponent<Rigidbody>().velocity = transform.forward * speed * -1;
 			}
 		}

@@ -8,13 +8,6 @@ public class Lift : MonoBehaviour
 
 	private void OnTriggerStay()
 	{
-		if (tag == "Up")
-		{
 			movePlatform.transform.position += movePlatform.transform.up * Time.deltaTime * 20;
-		}
-		else if (tag == "Down")
-		{
-			movePlatform.transform.position += movePlatform.transform.up * Time.deltaTime * -20;
-		}
 	}
 }

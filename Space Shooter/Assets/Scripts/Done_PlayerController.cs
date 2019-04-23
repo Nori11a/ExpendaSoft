@@ -11,12 +11,16 @@ namespace CompleteProject
 {
 	public class Done_PlayerController : MonoBehaviour
 	{
-		public float speed;
 		public Done_Boundary boundary;
 		private Done_GameController gameController;
 
+		public PickUpSpin pickUp;
+		GameObject enemy;
+		EnemyHealth enemyHealth; 
+
 		public float RotateSpeed = 100f; //speed of the rotation
 
+		public float speed;
 		public GameObject shot;
 		public Transform shotSpawn;
 		public float fireRate;
@@ -34,21 +38,23 @@ namespace CompleteProject
 		int floorMask;
 		float camRayLength = 100f;
 
+
+
 		void Awake()
 		{
 			floorMask = LayerMask.GetMask ("Floor");
 			//playerHealth = gameObject.GetComponent <PlayerHealth> ();
 
 			rBody = GetComponent <Rigidbody>();
+
+			enemy = GameObject.FindGameObjectWithTag("Enemy");
+			enemyHealth = enemy.GetComponent<EnemyHealth>();
 		}
 
 		void Start ()
 		{
 			GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
 			gameController = gameControllerObject.GetComponent <Done_GameController>();
-
-
-
 		}
 
 		void Update()
@@ -106,16 +112,47 @@ namespace CompleteProject
 		{
 			if(other.gameObject.layer ==LayerMask.NameToLayer("PickUp"))
 			{
-				if(other.tag == "Coin")
+				/*if(other.tag == "Coin")
 				{
 					gameController.AddCoin(1);
 					other.gameObject.SetActive(false);
-				}
+				}*/
 				/*else if(other.tag == "Heal")
 				{
 					playerHealth.HealDamage(4);
 					other.gameObject.SetActive(false);
 				}*/
+				//pickUp.Sound();
+
+				switch(other.gameObject.tag)
+				{
+					case "Coin":
+					//other.gameObject.SetActive(false);	
+					gameController.AddCoin(1);
+						//pickUp.Sound();
+						break;
+
+					case "Rate":
+						//fireRate -= .02f;
+						fireRate = .025f;  //this one is just to show off the power up, not meant for actual gameplay
+						other.gameObject.SetActive(false);
+						break;
+
+					case "Power":
+						//enemyHealth.Buff(.25f);
+						enemyHealth.Buff(10f);  //this one is just to show off the power up, not meant for actual gameplay
+						other.gameObject.SetActive(false);
+						break;
+
+					case "Speed":
+						//speed += .2f;
+						speed += 10f;  //this one is just to show off the power up, not meant for actual gameplay
+						other.gameObject.SetActive(false);
+						break;
+				}
+
+
+
 			}
 		}
 	}

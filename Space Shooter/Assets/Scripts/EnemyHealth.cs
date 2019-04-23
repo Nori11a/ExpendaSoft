@@ -4,17 +4,19 @@ namespace CompleteProject
 {
     public class EnemyHealth : MonoBehaviour
     {
-        public int startingHealth = 5;            // The amount of health the enemy starts the game with.
-        public int currentHealth;                   // The current health the enemy has.
-        public AudioClip deathClip;                 // The sound to play when the enemy dies.
+        public float startingHealth = 5;            // The amount of health the enemy starts the game with.
+        public float currentHealth;                   // The current health the enemy has.
+        
+		public float buff = 0;
+
+		//public AudioClip hurtClip;
+		//public AudioClip deathClip;                 // The sound to play when the enemy dies.
 
         AudioSource enemyAudio;                     // Reference to the audio source.
         ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
         CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
         bool isDead;                                // Whether the enemy is dead.
         bool isSinking;                             // Whether the enemy has started sinking through the floor.
-
-
 
 		public GameObject explosion;
 		public GameObject playerExplosion;
@@ -47,18 +49,17 @@ namespace CompleteProject
         }
 
 
-        public void TakeDamage (int amount/*, Vector3 hitPoint*/)
+        public void TakeDamage (float amount)
         {
-            // If the enemy is dead...
+			// If the enemy is dead...
             if(isDead)
+			{
                 // ... no need to take damage so exit the function.
                 return;
-
-            // Play the hurt sound effect.
-           // enemyAudio.Play ();
+			}
 
             // Reduce the current health by the amount of damage sustained.
-            currentHealth -= amount;
+            currentHealth -= amount + buff;
             
             // Set the position of the particle system to where the hit was sustained.
             //hitParticles.transform.position = hitPoint;
@@ -67,7 +68,7 @@ namespace CompleteProject
             hitParticles.Play();
 
             // If the current health is less than or equal to zero...
-            if(currentHealth <= 0)
+			if(currentHealth <= 0 && !isDead)
             {
                 // ... the enemy is dead.
                 Death ();
@@ -77,22 +78,49 @@ namespace CompleteProject
 
         void Death ()
         {
-            // The enemy is dead.
+			enemyAudio.Play();
+			Instantiate(playerExplosion, transform.position, transform.rotation);
+
+			// The enemy is dead.
             isDead = true;
 
             // Turn the collider into a trigger so shots can pass through it.
-            capsuleCollider.isTrigger = true;
-
-            // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
-            //enemyAudio.clip = deathClip;
-            //enemyAudio.Play ();
-
-			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+			capsuleCollider.isTrigger = true;
 
 			gameController.AddScore(scoreValue);
 			Destroy (other.gameObject);
 			Destroy (gameObject);
         }
+
+		void OnTriggerEnter (Collider other)
+		{
+			if(other.gameObject.layer ==LayerMask.NameToLayer("Projectile") && other.tag != "Enemy")
+			{
+				// Play the hurt sound effect.
+				enemyAudio.Play();
+
+				Instantiate(playerExplosion, transform.position, transform.rotation);
+			}
+
+			if (other.tag == "Player")
+			{
+				Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+				gameController.GameOver();
+			}
+			else
+			{
+				return;
+			}
+
+			//gameController.AddScore(scoreValue);
+
+			//Death();
+		}
+
+		public void Buff(float d)
+		{
+			buff += d;
+		}
 			
     }
 }

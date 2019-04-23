@@ -5,22 +5,34 @@ using UnityEngine;
 public class PickUpSpin : MonoBehaviour
 {
 	float speed = 100f;
+	public GameObject pickUp;
+
+	AudioSource collectAudio;
+
+	void Awake()
+	{
+		collectAudio = GetComponent <AudioSource> ();
+	}
 
     void Update()
     {
 		transform.Rotate(Vector3.right, speed * Time.deltaTime);
     }
 
-	/*void OnTriggerEnter (Collider other)
+	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.tag == "Player")
+		if(other.tag == "Player")
 		{
-			GetComponent<AudioSource>().Play();
-			if(gameObject.tag == "Coin")
-			{
-				GetComponent<AudioSource>().Play();
-			}
+			collectAudio.Play();
+			//AudioSource.PlayClipAtPoint();
 
+			pickUp.SetActive(false);
 		}
-	}*/
+
+	}
+
+	public void Sound()
+	{
+		collectAudio.Play();
+	}
 }

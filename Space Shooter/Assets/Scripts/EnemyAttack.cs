@@ -6,7 +6,7 @@ namespace CompleteProject
     public class EnemyAttack : MonoBehaviour
     {
         public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
-        public int attackDamage = 10;               // The amount of health taken away per attack.
+        public float attackDamage = 10;               // The amount of health taken away per attack.
 
 
         Animator anim;                              // Reference to the animator component.
@@ -17,6 +17,8 @@ namespace CompleteProject
         bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
         float timer;                                // Timer for counting up to the next attack.
 
+		public GameObject explosion;
+		public GameObject playerExplosion;
 
         void Awake ()
         {

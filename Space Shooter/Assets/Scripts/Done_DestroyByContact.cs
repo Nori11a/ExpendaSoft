@@ -11,17 +11,13 @@ namespace CompleteProject
 		public int scoreValue;
 		private Done_GameController gameController;
 
+		GameObject player;  
+		PlayerHealth playerHealth;
+
 		void Start ()
 		{
-			GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
-			if (gameControllerObject != null)
-			{
-				gameController = gameControllerObject.GetComponent <Done_GameController>();
-			}
-			if (gameController == null)
-			{
-				Debug.Log ("Cannot find 'GameController' script");
-			}
+			player = GameObject.FindGameObjectWithTag ("Player");
+			playerHealth = player.GetComponent <PlayerHealth> ();
 		}
 
 		void OnTriggerEnter (Collider other)
@@ -39,10 +35,11 @@ namespace CompleteProject
 			if (other.tag == "Player")
 			{
 				Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-				gameController.GameOver();
+				playerHealth.TakeDamage (10);
+
 			}
 			
-			gameController.AddScore(scoreValue);
+			//gameController.AddScore(scoreValue); //this is here incase everything keeps blowing up.
 			Destroy (other.gameObject);
 			Destroy (gameObject);
 		}
