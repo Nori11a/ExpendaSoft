@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Done_DestroyByContact.cs" />
      <Compile Include="Assets\Scripts\Done_GameController.cs" />
      <Compile Include="Assets\Scripts\Done_PlayerController.cs" />
+     <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
      <Compile Include="Assets\Scripts\EnemyAttack.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyManager.cs" />
@@ -71,10 +72,14 @@
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\GameOverManager.cs" />
      <Compile Include="Assets\Scripts\Lift.cs" />
+     <Compile Include="Assets\Scripts\NextLevel.cs" />
      <Compile Include="Assets\Scripts\Parry.cs" />
      <Compile Include="Assets\Scripts\PickUpSpin.cs" />
-     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\Shop\ItemButton.cs" />
+     <Compile Include="Assets\Scripts\Shop\MakeItemObject.cs" />
+     <Compile Include="Assets\Scripts\Shop\Objects.cs" />
+     <Compile Include="Assets\Scripts\Shop\ShopController.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Nick_2/Documents/GitHub/ExpendaSoft/Space Shooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

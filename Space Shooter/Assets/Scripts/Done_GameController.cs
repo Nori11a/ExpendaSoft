@@ -19,8 +19,8 @@ public class Done_GameController : MonoBehaviour
 
     private bool gameOver;
     private bool restart;
-    private int score;
-	private int coin;
+    private static int score = 0;
+	public static int coin = 0;
 
     void Start()
     {
@@ -28,8 +28,8 @@ public class Done_GameController : MonoBehaviour
         restart = false;
         restartText.text = "";
         gameOverText.text = "";
-        score = 0;
-		coin = 0;
+        //score = 0;
+		//coin = 0;
         UpdateScore();
 		UpdateCoin();
         StartCoroutine(SpawnWaves());

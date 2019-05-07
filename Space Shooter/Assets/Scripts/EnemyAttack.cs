@@ -25,7 +25,7 @@ namespace CompleteProject
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
 			enemy = GameObject.FindGameObjectWithTag("Enemy");
-            playerHealth = player.GetComponent <PlayerHealth> ();
+			playerHealth = player.GetComponent <PlayerHealth>();
             enemyHealth = enemy.GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
         }
@@ -33,80 +33,14 @@ namespace CompleteProject
 
         void OnTriggerEnter (Collider other)
         {
-            // If the entering collider is the player...
-			if(tag == "Nu")
+			if(other.gameObject == player)
 			{
-				if(other.gameObject == player)
-				{
-					// ... the player is in range.
-					//playerInRange = true;
-					playerHealth.TakeDamage (attackDamage);
-				}
-				else if(other.gameObject == enemy)
-				{
-					enemyHealth.TakeDamage(attackDamage);
-				}
-			}
-			else
-			{
-				if(other.gameObject == player)
-				{
-					// ... the player is in range.
-					//playerInRange = true;
-					playerHealth.TakeDamage (attackDamage);
-				}
+				// ... the player is in range.
+				//playerInRange = true;
+				playerHealth.TakeDamage (attackDamage);
 			}
 
-			/*else if(other.gameObject == enemy)  //edit later for when reflecting is possible
-			{
-				enemyHealth.TakeDamage (attackDamage);
-			}*/
         }
-
-
-        /*void OnTriggerExit (Collider other)
-        {
-            // If the exiting collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is no longer in range.
-                playerInRange = false;
-            }
-        }
-
-
-        void Update ()
-        {
-            // Add the time since Update was last called to the timer.
-            timer += Time.deltaTime;
-
-            // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
-            {
-                // ... attack.
-                Attack ();
-            }
-
-            // If the player has zero or less health...
-            if(playerHealth.currentHealth <= 0)
-            {
-                // ... tell the animator the player is dead.
-                anim.SetTrigger ("PlayerDead");
-            }
-        }
-
-
-        void Attack ()
-        {
-            // Reset the timer.
-            timer = 0f;
-
-            // If the player has health to lose...
-            if(playerHealth.currentHealth > 0)
-            {
-                // ... damage the player.
-                playerHealth.TakeDamage (attackDamage);
-            }
-        }*/
+			
     }
 }
