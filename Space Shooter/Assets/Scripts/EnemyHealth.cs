@@ -14,7 +14,6 @@ namespace CompleteProject
         //ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
         CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
         //bool isDead;                                // Whether the enemy is dead.
-        //bool isSinking;                             // Whether the enemy has started sinking through the floor.
 
 		public GameObject explosion;
 		public GameObject playerExplosion;
@@ -68,16 +67,16 @@ namespace CompleteProject
 
 				Instantiate(playerExplosion, transform.position, transform.rotation);
 
-				if (other.tag == "Nu")
+				if (other.tag == "Nu") //when getting hit by their own bullet
 				{
 					currentHealth -= 1;
 				}
-				else
+				else //when it's you shooting them
 				{
 					currentHealth -= 1 + Done_PlayerController.power;  //figures out how much damage is taken
 				}
 
-				if (currentHealth <= 0)
+				if (currentHealth <= 0) //runs death code if HP hits zero
 				{
 					Death();
 				}

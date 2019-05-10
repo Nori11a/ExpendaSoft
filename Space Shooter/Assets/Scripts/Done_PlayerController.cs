@@ -13,6 +13,7 @@ namespace CompleteProject
 	{
 		public Done_Boundary boundary;
 		private Done_GameController gameController;
+		private Parry parry;
 
 		public PickUpSpin pickUp;
 		GameObject enemy;
@@ -25,6 +26,8 @@ namespace CompleteProject
 		public static float fireRate = 1.75f;
 		public static float power = 0;
 		public static float speed = 4;
+		public static int reflector = 0;
+		public static int node = 0;
 
 		private float nextFire;
 
@@ -41,7 +44,9 @@ namespace CompleteProject
 
 		public Objects[] items;
 		public int boughtItem = 0;
-		public int[] amount = new int[] {0, 0, 0, 0};
+		public int[] amount = new int[] {0, 0, 0, 0, 0, 0, 0};
+
+		public static bool gun = true;
 
 		void Awake()
 		{
@@ -64,7 +69,7 @@ namespace CompleteProject
 		void Update()
 		{
 			//this allows the player to shoot lasers
-			if (Input.GetButton("Fire1") && Time.time > nextFire) //Input.GetKey is used to figure out what key needs to be pushed, and it'll know it's the Space Bar because of "KeyCode.Space"
+			if (Input.GetButton("Fire1") && Time.time > nextFire && gun == true) //Input.GetKey is used to figure out what key needs to be pushed, and it'll know it's the Space Bar because of "KeyCode.Space"
 			{
 				nextFire = Time.time + fireRate;
 
@@ -126,14 +131,29 @@ namespace CompleteProject
 				case 2:
 					power += (1f * amount[2]);
 					//power += (2f * amount[2]); //this one is just to show off the power up, not meant for actual gameplay
-					boughtItem = 0;
+					boughtItem--;
 					amount[2] = 0;
 					break;
 				case 3:
 					speed += (1f * amount[3]);  
 					//speed += (2f * amount[3]); //this one is just to show off the power up, not meant for actual gameplay
-					boughtItem = 0;
+					boughtItem--;
 					amount[3] = 0;
+					break;
+				case 4:
+					gameController.AddLives(amount[4]);
+					boughtItem--;
+					amount[4] = 0;
+					break;
+				case 5:
+					reflector += (amount[5]);
+					boughtItem--;
+					amount[5] = 0;
+					break;
+				case 6:
+					node += (amount[6]);
+					boughtItem--;
+					amount[6] = 0;
 					break;
 			}
 		}

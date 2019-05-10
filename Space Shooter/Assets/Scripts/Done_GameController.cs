@@ -16,11 +16,13 @@ public class Done_GameController : MonoBehaviour
     public Text restartText;
     public Text gameOverText;
 	public Text coinText;
+	public Text lifeText;
 
     private bool gameOver;
     private bool restart;
     private static int score = 0;
 	public static int coin = 0;
+	public static int lives = 3;
 
     void Start()
     {
@@ -28,20 +30,25 @@ public class Done_GameController : MonoBehaviour
         restart = false;
         restartText.text = "";
         gameOverText.text = "";
-        //score = 0;
-		//coin = 0;
+		lifeText.text = "";
+
         UpdateScore();
 		UpdateCoin();
+
+		UpdateLives();
+
         StartCoroutine(SpawnWaves());
     }
 
     void Update()
     {
-        if (restart)
+
+		if (restart)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+				lives--;
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
@@ -90,6 +97,24 @@ public class Done_GameController : MonoBehaviour
 	void UpdateCoin()
 	{
 		coinText.text = "Coins: " + coin;
+	}
+
+	public void AddLives(int UP)
+	{
+		lives += UP;
+		UpdateLives();
+	}
+
+	void UpdateLives()
+	{
+		if(lives < 10)
+		{
+			lifeText.text = "0" + lives;
+		}
+		else
+		{
+			lifeText.text = "" + lives;
+		}
 	}
 
     public void GameOver()

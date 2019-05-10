@@ -41,8 +41,12 @@ namespace CompleteProject
 			{
 				//gameController.coin -= player.items[itemNum].cost;
 				gameController.AddCoin(player.items[itemNum].cost * -1);
-				player.boughtItem = itemNum;
 
+				if(player.boughtItem < itemNum)
+				{
+					player.boughtItem = itemNum;
+				}
+					
 				player.amount[itemNum]++;
 			}
 			else

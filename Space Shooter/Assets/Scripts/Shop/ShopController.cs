@@ -2,28 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopController : MonoBehaviour
+namespace CompleteProject
 {
-	public GameObject shopPanel;
-
-	void OnTriggerEnter(Collider other)
+	public class ShopController : MonoBehaviour
 	{
-		if (other.gameObject.tag == "Player")
+		public GameObject shopPanel;
+
+		void OnTriggerEnter(Collider other)
 		{
-			OpenShop();
+			if (other.gameObject.tag == "Player")
+			{
+				OpenShop();
+			}
 		}
-	}
 
-	void OpenShop()
-	{
-		shopPanel.SetActive(true);
-		Time.timeScale = 0;
-	}
+		void OpenShop()
+		{
+			Done_PlayerController.gun = false;
+			shopPanel.SetActive(true);
+			Time.timeScale = 0;
+		}
 
-	public void CloseShop()
-	{
-		shopPanel.SetActive(false);
-		Time.timeScale = 1;
+		public void CloseShop()
+		{
+			Done_PlayerController.gun = true;
+			shopPanel.SetActive(false);
+			Time.timeScale = 1;
+		}
+			
 	}
-		
 }
