@@ -72,6 +72,12 @@
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\GameOverManager.cs" />
      <Compile Include="Assets\Scripts\Lift.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\LoadSceneOnClick.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\NewGameLoad.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\NewGameReset.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\QuitOnClick.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\SelectOnInput.cs" />
+     <Compile Include="Assets\Scripts\M_Menu\StatUpdate.cs" />
      <Compile Include="Assets\Scripts\NextLevel.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\NodeActive.cs" />

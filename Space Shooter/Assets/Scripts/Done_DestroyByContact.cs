@@ -40,8 +40,10 @@ namespace CompleteProject
 			}
 			
 			//gameController.AddScore(scoreValue); //this is here incase everything keeps blowing up.
+
 			Destroy (other.gameObject);
 			Destroy (gameObject);
+
 		}
 	}
 }

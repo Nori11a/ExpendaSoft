@@ -8,17 +8,17 @@ namespace CompleteProject
 	public class NextLevel : MonoBehaviour
 	{
 
-		private int level = 1;
+		public int level = 1;
 		//Done_PlayerController player;
 
-		private Vector3 place;
+		//private Vector3 place;
 
-		private Transform player;
-		public Transform start;
+		//private Transform player;
+		//public Transform start;
 
 		void Start()
 		{
-			player = GameObject.FindGameObjectWithTag("Player").transform;
+			//player = GameObject.FindGameObjectWithTag("Player").transform;
 		}
 
 		void OnTriggerEnter(Collider other)
@@ -28,8 +28,8 @@ namespace CompleteProject
 				//player.position = start.position;
 
 				Application.LoadLevel(level);
-				player.position = start.position;
-				level++;
+				/*player.position = start.position;
+				level++;*/
 
 			}
 		}

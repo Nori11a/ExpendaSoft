@@ -25,9 +25,11 @@ namespace CompleteProject
 		public Transform shotSpawn;
 		public static float fireRate = 1.75f;
 		public static float power = 0;
-		public static float speed = 4;
+		public static float speed = 4;  //4
 		public static int reflector = 0;
 		public static int node = 0;
+
+		public float Mode = 1f;  //changes speed.  .5 for half speed, 1 for full
 
 		private float nextFire;
 
@@ -76,6 +78,29 @@ namespace CompleteProject
 				Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 				GetComponent<AudioSource>().Play();
 			}
+
+			if(Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				if(Mode == 1)
+				{
+					Mode = 0.5f;
+				}
+				else
+				{
+					Mode = 1f;
+				}
+			}
+
+			if(speed > 15)
+			{
+				speed = 15;
+			}
+			if(power > 15)
+			{
+				power = 15;
+			}
+
+			gameController.SetGear(Mode);
 		}
 
 		void FixedUpdate()
@@ -93,7 +118,7 @@ namespace CompleteProject
 			
 			movement.Set(xAxis, yAxis, zAxis);
 
-			movement = movement.normalized * speed * Time.deltaTime;
+			movement = movement.normalized * speed * Mode * Time.deltaTime;
 
 			rBody.MovePosition (transform.position + movement);
 
@@ -123,7 +148,7 @@ namespace CompleteProject
 			switch(boughtItem)
 			{
 				case 1:
-					fireRate -= (.1f * amount[1]);
+					fireRate -= (.05f * amount[1]);
 					//fireRate -= (.2f * amount[1]); //this one is just to show off the power up, not meant for actual gameplay
 					boughtItem = 0;
 					amount[1] = 0;
@@ -171,7 +196,7 @@ namespace CompleteProject
 						break;
 
 					case "Rate":
-						fireRate -= .02f;
+						fireRate -= .01f;
 						//fireRate = .025f;  //this one is just to show off the power up, not meant for actual gameplay
 						other.gameObject.SetActive(false);
 						break;

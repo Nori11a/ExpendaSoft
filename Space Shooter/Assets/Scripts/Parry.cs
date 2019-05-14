@@ -9,13 +9,15 @@ namespace CompleteProject
 		public GameObject parry;
 		public GameObject parryEX;
 
-		//public Sprite knob;  
+		public GameObject knob;
+		private float knobLocation = 0f;
+
 		public float coolDown = 6; //tells the shield how long to stay active and how long will it be unusable
 
 		int whileActive = 30;
 		int whileRecover = 5;
 
-		int upgrade = 0;
+		//int upgrade = 0;
 
 		bool EX = false;
 
@@ -93,6 +95,11 @@ namespace CompleteProject
 		void FixedUpdate()
 		{
 			Upgrade();
+
+			//Vector2 position = knob.transform.position;
+			knobLocation = 166 - (coolDown * 24f);
+
+			knob.transform.position = new Vector3(knobLocation, 67f, 0f);
 		}
 
 		void OnTriggerEnter (Collider other)
